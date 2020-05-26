@@ -1,0 +1,45 @@
+Team,Group,"Previous 
+appearances","Previous 
+titles","Previous
+ finals","Previous
+ semifinals","Current 
+FIFA rank","First match 
+against",Match index,"history with 
+first opponent
+ W-L","history with
+ first opponent
+ goals","Second match
+ against",Match index,"history with
+ second opponent
+ W-L","history with
+ second opponent
+ goals","Third match
+ against",Match index,"history with
+ third opponent
+ W-L","history with
+ third opponent
+ goals",FIFA 2020 Overall
+Italy,A,10,10,6,6,13,Turkey,1,3,3,Switzerland,17,N/A,N/A,Wales,33,0,0,85
+Switzerland,A,10,0,0,0,12,Wales,9,-1,-2,Italy,26,N/A,N/A,Costarica,42,0,1,78
+Turkey,A,6,0,0,2,29,Italy,10,N/A,N/A,Wales,25,-8,-19,Switzerland,42,0,-1,75
+Wales,A,14,1,1,2,23,Switzerland,7,N/A,N/A,Turkey,24,1,3,Italy,40,-3,-9,75
+Belgium,B,14,4,8,13,1,Russia,5,1,6,Denmark,21,-1,-1,Finland,37,4,9,91
+Denmark,B,4,0,0,0,16,Finland,6,N/A,N/A,Belgium,22,1,3,Russia,37,-4,-9,74
+Finalnd,B,0,0,0,0,58,Denmark,7,N/A,N/A,Russia,24,1,3,Belgium,40,-3,-9,71
+Russia,B,4,0,0,1,38,Belgium,8,N/A,N/A,Finland,23,-1,0,Denmark,40,3,9,74
+Austria,C,5,0,0,0,26,Iceland,8,N/A,N/A,Netherlands,24,-1,-3,Ukraine,39,-3,-1,74
+Netherlands,C,20,5,7,11,14,Ukraine,9,1,2,Austria,25,8,19,Iceland,41,1,1,80
+Ukraine,C,4,0,0,0,24,Netherlands,10,N/A,N/A,Iceland,25,-8,-19,Austria,42,0,-1,76
+Iceland,C,11,0,0,2,39,Austria,10,N/A,N/A,Ukraine,26,N/A,N/A,Netherlands,41,-1,-1,74
+England,D,18,4,8,13,4,Croatia,11,4,13,Norway,27,2,10,Czech Republic,43,1,0,89
+Croatia,D,11,0,1,4,6,England,12,1,2,Czech Republic,27,-2,-10,Norway,44,2,3,85
+Czech Republic,D,12,0,0,1,5,Norway,13,N/A,N/A,Enland,29,0,0,Croatia,45,-17,-70,77
+Norway,D,14,1,1,2,44,Czech Republic,14,1,2,England,30,N/A,N/A,Croatia,45,17,70,73
+Poland,E,7,0,0,2,19,Slovakia,15,N/A,N/A,Spain,31,N/A,N/A,Sweden,47,2,3,77
+Spain,E,10,0,0,1,8,Sweden,1,-1,-2,Poland,17,N/A,N/A,Slovakia,33,0,0,84
+Sweden,E,5,0,0,0,17,Spain,8,N/A,N/A,Slovakia,24,-1,-3,Poland,39,-3,-1,75
+Slovakia,E,5,0,0,0,32,Poland,8,N/A,N/A,Sweden,24,-1,-3,Spain,39,-3,-1,71
+France,F,10,0,0,1,2,Germany,1,-1,-2,Georgia,17,N/A,N/A,Portugal,33,0,0,92
+Germany,F,10,0,0,1,15,France,1,-1,-2,Portugal,17,N/A,N/A,Georgia,33,0,0,87
+Portugal,F,10,0,0,1,7,Georgia,1,-1,-2,Germany,17,N/A,N/A,France,33,0,0,87
+Georgia,F,5,0,0,0,91,Portugal,8,N/A,N/A,France,24,-1,-3,Germany,39,-3,-1,68
