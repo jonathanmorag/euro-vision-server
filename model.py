@@ -205,13 +205,13 @@ class Model:
             elif predictions[i] == 2:
                 #print("Winner: " + backup_pred_set.iloc[i, 0])
                 winners.append(backup_pred_set.iloc[i, 0])
-            print('Probability of ' + backup_pred_set.iloc[i, 1] + ' winning: ', '%.3f' % (
-                self.logreg.predict_proba(pred_set)[i][0]))
-            print('Probability of Draw: ', '%.3f' %
-                  (self.logreg.predict_proba(pred_set)[i][1]))
-            print('Probability of ' + backup_pred_set.iloc[i, 0] + ' winning: ', '%.3f' % (
-                self.logreg.predict_proba(pred_set)[i][2]))
-            print("")
+            # print('Probability of ' + backup_pred_set.iloc[i, 1] + ' winning: ', '%.3f' % (
+            #     self.logreg.predict_proba(pred_set)[i][0]))
+            # print('Probability of Draw: ', '%.3f' %
+            #       (self.logreg.predict_proba(pred_set)[i][1]))
+            # print('Probability of ' + backup_pred_set.iloc[i, 0] + ' winning: ', '%.3f' % (
+            #     self.logreg.predict_proba(pred_set)[i][2]))
+            # print("")
 
         return winners
 
