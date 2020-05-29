@@ -20,6 +20,8 @@ def predict_match():
     try:
         team1 = request.args.get("team1")
         team2 = request.args.get("team2")
-        return jsonify(winner=model.predictSingleMatch(team1, team2))
+        if(team1 != team2):
+            return jsonify(winner=model.predictSingleMatch(team1, team2))
+        return jsonify(winner="Please select two different teams")
     except Exception as e:
         return "Error has occured"
