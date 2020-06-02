@@ -117,23 +117,58 @@ class Model:
         self.logreg = pickle.load(open('trained_model.sav', 'rb'))
 
     def predictGroupMatches(self):
+        standings = {}
         predictions = self.logreg.predict(self.pred_set)
         for i in range(self.fixtures.shape[0]):
-            print(self.backup_pred_set.iloc[i, 1] +
-                  " and " + self.backup_pred_set.iloc[i, 0])
+            # print(self.backup_pred_set.iloc[i, 1] +
+            #      " and " + self.backup_pred_set.iloc[i, 0])
             if predictions[i] == 0:
-                print("Winner: " + self.backup_pred_set.iloc[i, 1])
+                team = self.backup_pred_set.iloc[i, 1]
+                # print("Winner: " + team)
+                if(team in standings):
+                    standings[team] += 3
+                else:
+                    standings[team] = 3
             elif predictions[i] == 1:
-                print("Draw")
+                team1 = self.backup_pred_set.iloc[i, 0]
+                team2 = self.backup_pred_set.iloc[i, 1]
+                # print("Draw")
+                if(team1 in standings):
+                    standings[team1] += 1
+                else:
+                    standings[team1] = 1
+                if(team2 in standings):
+                    standings[team2] += 1
+                else:
+                    standings[team2] = 1
             elif predictions[i] == 2:
-                print("Winner: " + self.backup_pred_set.iloc[i, 0])
-            print('Probability of ' + self.backup_pred_set.iloc[i, 1] + ' winning: ', '%.3f' % (
-                self.logreg.predict_proba(self.pred_set)[i][0]))
-            print('Probability of Draw: ', '%.3f' %
-                  (self.logreg.predict_proba(self.pred_set)[i][1]))
-            print('Probability of ' + self.backup_pred_set.iloc[i, 0] + ' winning: ', '%.3f' % (
-                self.logreg.predict_proba(self.pred_set)[i][2]))
-            print("")
+                team = self.backup_pred_set.iloc[i, 0]
+                # print("Winner: " + self.backup_pred_set.iloc[i, 0])
+                if(team in standings):
+                    standings[team] += 3
+                else:
+                    standings[team] = 3
+
+            # print('Probability of ' + self.backup_pred_set.iloc[i, 1] + ' winning: ', '%.3f' % (
+            #     self.logreg.predict_proba(self.pred_set)[i][0]))
+            # print('Probability of Draw: ', '%.3f' %
+            #       (self.logreg.predict_proba(self.pred_set)[i][1]))
+            # print('Probability of ' + self.backup_pred_set.iloc[i, 0] + ' winning: ', '%.3f' % (
+            #     self.logreg.predict_proba(self.pred_set)[i][2]))
+            # print("")
+        standings = {k: v for k, v in sorted(
+            standings.items(), key=lambda value: value[1], reverse=True)}
+        group = []
+        tuples = []
+        [group.append(team) for team in standings]
+        group = group[:8]
+
+        i = 0
+        while(i < len(group) - 1):
+            tuples.append((group[i], group[i+1]))
+            i += 2
+
+        return tuples
 
     def clean_and_predict(self, matches):
 
@@ -198,7 +233,7 @@ class Model:
                 #print("Winner: " + backup_pred_set.iloc[i, 1])
             elif predictions[i] == 1:
                 # print("Draw")
-                if(logreg.predict_proba(pred_set)[i][0] > logreg.predict_proba(pred_set)[i][2]):
+                if(self.logreg.predict_proba(pred_set)[i][0] > self.logreg.predict_proba(pred_set)[i][2]):
                     winners.append(backup_pred_set.iloc[i, 1])
                 else:
                     winners.append(backup_pred_set.iloc[i, 0])
@@ -218,7 +253,7 @@ class Model:
     def predictEuroWinner(self, group):
         if len(group) == 1:
             euro_winner = self.clean_and_predict(group)
-            return euro_winner[0].upper()
+            self.euro_winner = euro_winner[0].upper()
         else:
             winners = self.clean_and_predict(group)
             random.shuffle(winners)
@@ -227,14 +262,16 @@ class Model:
             while i < (len(winners) - 1):
                 next_group.append((winners[i], winners[i+1]))
                 i += 2
-            predictEuroWinner(next_group)
+            self.predictEuroWinner(next_group)
 
     def predictSingleMatch(self, team1, team2):
         tup = (team1, team2)
         return self.clean_and_predict([tup])[0]
 
 
-# m = Model()
-# m.load_weights()
-# winner = m.predictSingleMatch('Spain', 'Germany')
-# print(winner)
+m = Model()
+m.load_weights()
+group_stage_winners = m.predictGroupMatches()
+m.predictEuroWinner(group_stage_winners)
+print(m.euro_winner)
+# winner = m.predictSingleMatch('England', 'Germany')
