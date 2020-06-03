@@ -227,10 +227,10 @@ class Model:
         winners = []
         predictions = self.logreg.predict(pred_set)
         for i in range(len(pred_set)):
-            #print(backup_pred_set.iloc[i, 1] + " and " + backup_pred_set.iloc[i, 0])
+            # print(backup_pred_set.iloc[i, 1] + " and " + backup_pred_set.iloc[i, 0])
             if predictions[i] == 0:
                 winners.append(backup_pred_set.iloc[i, 1])
-                #print("Winner: " + backup_pred_set.iloc[i, 1])
+                # print("Winner: " + backup_pred_set.iloc[i, 1])
             elif predictions[i] == 1:
                 # print("Draw")
                 if(self.logreg.predict_proba(pred_set)[i][0] > self.logreg.predict_proba(pred_set)[i][2]):
@@ -238,7 +238,7 @@ class Model:
                 else:
                     winners.append(backup_pred_set.iloc[i, 0])
             elif predictions[i] == 2:
-                #print("Winner: " + backup_pred_set.iloc[i, 0])
+                # print("Winner: " + backup_pred_set.iloc[i, 0])
                 winners.append(backup_pred_set.iloc[i, 0])
             # print('Probability of ' + backup_pred_set.iloc[i, 1] + ' winning: ', '%.3f' % (
             #     self.logreg.predict_proba(pred_set)[i][0]))
@@ -268,10 +268,53 @@ class Model:
         tup = (team1, team2)
         return self.clean_and_predict([tup])[0]
 
+    def predictStage(self, group, team, index):
+        if len(group) == 1:
+            euro_winner = self.clean_and_predict(group)
+            if(euro_winner[0] == team):
+                self.stage = 'Euro Winner!'
+                return
+
+        exists = False
+        for t in group:
+            t1, t2 = t
+            if(t1 == team or t2 == team):
+                exists = True
+        if not exists:
+            if index == 0:
+                self.stage = 'Group Stage'
+            if index == 1:
+                self.stage = 'Quarter Finals'
+            if index == 2:
+                self.stage = 'Semi Finals'
+            if index == 3:
+                self.stage = 'Final'
+            if index == 4:
+                self.stage = 'Euro Winner!'
+
+        if exists:
+            winners = self.clean_and_predict(group)
+            random.shuffle(winners)
+            next_group = []
+            i = 0
+            while i < (len(winners) - 1):
+                next_group.append((winners[i], winners[i+1]))
+                i += 2
+            self.predictStage(next_group, team, index+1)
+
+
+########################################################################
 
 m = Model()
 m.load_weights()
 group_stage_winners = m.predictGroupMatches()
-m.predictEuroWinner(group_stage_winners)
-print(m.euro_winner)
+m.predictStage(group_stage_winners, 'Spain', 0)
+print(m.stage)
+
+########################################################################
+
 # winner = m.predictSingleMatch('England', 'Germany')
+
+########################################################################
+
+# m.predictEuroWinner(group_stage_winners)
