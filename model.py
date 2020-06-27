@@ -253,7 +253,7 @@ class Model:
     def predictEuroWinner(self, group):
         if len(group) == 1:
             euro_winner = self.clean_and_predict(group)
-            self.euro_winner = euro_winner[0].upper()
+            self.euro_winner = euro_winner[0]
         else:
             winners = self.clean_and_predict(group)
             random.shuffle(winners)
