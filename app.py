@@ -7,6 +7,10 @@ CORS(app)
 
 model = Model()
 model.load_weights()
+group_stage_winners = model.predictGroupMatches()
+
+# Using a dictionary in order to reduce computations
+dict_stages = {}
 
 
 @app.route("/")
@@ -21,5 +25,28 @@ def predict_match():
         team1 = request.args.get("team1")
         team2 = request.args.get("team2")
         return jsonify(winner=model.predictSingleMatch(team1, team2))
+    except Exception as e:
+        return "Error has occured"
+
+
+# Send a GET request such as: localhost:5000/predict_stage?team=France
+@app.route("/predict_stage", methods=['GET'])
+def predict_stage():
+    try:
+        team = request.args.get("team")
+        if(team not in dict_stages):
+            model.predictStage(group_stage_winners, team, 0)
+            dict_stages[team] = model.stage
+        return jsonify(stage=dict_stages[team])
+    except Exception as e:
+        return "Error has occured"
+
+
+# Send a GET request such as: localhost:5000/predict_winner
+@app.route("/predict_winner", methods=['GET'])
+def predict_winner():
+    try:
+        model.predictEuroWinner(group_stage_winners)
+        return jsonify(eurowinner=model.euro_winner)
     except Exception as e:
         return "Error has occured"

@@ -305,16 +305,18 @@ class Model:
 
 ########################################################################
 
-m = Model()
-m.load_weights()
-group_stage_winners = m.predictGroupMatches()
-m.predictStage(group_stage_winners, 'Spain', 0)
-print(m.stage)
+# m = Model()
+# m.load_weights()
+# group_stage_winners = m.predictGroupMatches()
+# m.predictStage(group_stage_winners, 'Netherlands', 0)
+# print(m.stage)
 
 ########################################################################
 
 # winner = m.predictSingleMatch('England', 'Germany')
+# print(winner)
 
 ########################################################################
 
 # m.predictEuroWinner(group_stage_winners)
+# print(m.euro_winner)
