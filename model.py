@@ -161,7 +161,7 @@ class Model:
         group = []
         tuples = []
         [group.append(team) for team in standings]
-        group = group[:8]
+        group = group[:16]
 
         i = 0
         while(i < len(group) - 1):
@@ -284,12 +284,14 @@ class Model:
             if index == 0:
                 self.stage = 'Group Stage'
             if index == 1:
-                self.stage = 'Quarter Finals'
+                self.stage = 'Round Of 16'
             if index == 2:
-                self.stage = 'Semi Finals'
+                self.stage = 'Quarter Finals'
             if index == 3:
-                self.stage = 'Final'
+                self.stage = 'Semi Finals'
             if index == 4:
+                self.stage = 'Final'
+            if index == 5:
                 self.stage = 'Euro Winner!'
 
         if exists:
@@ -308,7 +310,7 @@ class Model:
 # m = Model()
 # m.load_weights()
 # group_stage_winners = m.predictGroupMatches()
-# m.predictStage(group_stage_winners, 'Netherlands', 0)
+# m.predictStage(group_stage_winners, 'England', 0)
 # print(m.stage)
 
 ########################################################################
