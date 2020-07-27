@@ -248,14 +248,14 @@ class Model:
             #     self.logreg.predict_proba(pred_set)[i][2]))
             # print("")
 
-        return winners
+        return winners, float("{:.3f}".format(self.logreg.predict_proba(pred_set)[i][0])), float("{:.3f}".format(self.logreg.predict_proba(pred_set)[i][1])), float("{:.3f}".format(self.logreg.predict_proba(pred_set)[i][2]))
 
     def predictEuroWinner(self, group):
         if len(group) == 1:
-            euro_winner = self.clean_and_predict(group)
+            euro_winner = self.clean_and_predict(group)[0]
             self.euro_winner = euro_winner[0]
         else:
-            winners = self.clean_and_predict(group)
+            winners = self.clean_and_predict(group)[0]
             random.shuffle(winners)
             next_group = []
             i = 0
@@ -266,11 +266,11 @@ class Model:
 
     def predictSingleMatch(self, team1, team2):
         tup = (team1, team2)
-        return self.clean_and_predict([tup])[0]
+        return self.clean_and_predict([tup])
 
     def predictStage(self, group, team, index):
         if len(group) == 1:
-            euro_winner = self.clean_and_predict(group)
+            euro_winner = self.clean_and_predict(group)[0]
             if(euro_winner[0] == team):
                 self.stage = 'Euro Winner!'
                 return
@@ -295,7 +295,7 @@ class Model:
                 self.stage = 'Euro Winner!'
 
         if exists:
-            winners = self.clean_and_predict(group)
+            winners = self.clean_and_predict(group)[0]
             random.shuffle(winners)
             next_group = []
             i = 0

@@ -24,7 +24,8 @@ def predict_match():
     try:
         team1 = request.args.get("team1")
         team2 = request.args.get("team2")
-        return jsonify(winner=model.predictSingleMatch(team1, team2))
+        predicted = model.predictSingleMatch(team1, team2)
+        return jsonify(winner=predicted[0], home_rate=predicted[1], draw_rate=predicted[2], away_rate=predicted[3])
     except Exception as e:
         return "Error has occured"
 
