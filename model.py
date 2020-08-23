@@ -296,7 +296,6 @@ class Model:
 
         if exists:
             winners = self.clean_and_predict(group)[0]
-            random.shuffle(winners)
             next_group = []
             i = 0
             while i < (len(winners) - 1):
@@ -310,7 +309,7 @@ class Model:
 # m = Model()
 # m.load_weights()
 # group_stage_winners = m.predictGroupMatches()
-# m.predictStage(group_stage_winners, 'England', 0)
+# m.predictStage(group_stage_winners, 'France', 0)
 # print(m.stage)
 
 ########################################################################
